@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 #import "ImageCell.h"
-#import "NCData.h"
 #import "DetailViewController.h"
+#import "RSSParser.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ViewController ()
 
@@ -23,7 +24,22 @@
     
     self.navigationItem.title = @"ITDox";
     
-	_data = [NCData fetchData];
+
+    
+    NSURL *url = [NSURL URLWithString:@"http://itdox.ru/feed/"];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    
+    [RSSParser parseRSSFeedForRequest:request success:^(NSArray *feedItems){
+            for (RSSItem *item in feedItems) {
+                NSLog(@"%@", item.title);
+                
+                _data = feedItems;
+                [self.tableView reloadData];
+            }
+        }
+        failure:^(NSError *error){
+            NSLog(@"%@", error);
+        }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,15 +66,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   // static NSString *const CellId = @"Cell";
-    //static NSString *const CellId2 = @"Cell2";
     static NSString *const CellId3 = @"ImageCell";	
     
     ImageCell *cell = [tableView dequeueReusableCellWithIdentifier: CellId3];
-    NCData *item = [_data objectAtIndex:indexPath.row];
+    RSSItem *item = [_data objectAtIndex:indexPath.row];
     
     cell.cellTextLabel.text = item.title;
-    cell.cellImageView.image = [UIImage imageNamed:item.imageName];
+    NSArray *images = [item imagesFromContent];
+    
+    NSString *imagesUrlString = [images objectAtIndex:0];
+    NSURL *imagesUrl = [NSURL URLWithString:imagesUrlString];
+    [cell.cellImageView setImageWithURL:imagesUrl];
     
     return cell;
 }
@@ -67,7 +85,7 @@
 
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     if(indexPath) {
-        NCData *item = [_data objectAtIndex:indexPath.row];
+        RSSItem *item = [_data objectAtIndex:indexPath.row];
         [segue.destinationViewController setDetail:item];
     }
 }

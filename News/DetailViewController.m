@@ -7,8 +7,10 @@
 //
 
 #import "DetailViewController.h"
+#import "UIImageView+AFNetworking.h"
+#import "WebViewController.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <UIActionSheetDelegate>
 
 @end
 
@@ -27,16 +29,13 @@
 {
     [super viewDidLoad];
     [self reloadData];
+    
+    self.navigationItem.title = @"Новость";
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
--(void)setDetail:(NCData *)detail{
+-(void)setDetail:(RSSItem *)detail{
     _detail = detail;
     NSLog(@"%@", _detail.title);
 }
@@ -45,11 +44,15 @@
     if (!_detail) {
         return;
     }
-    self.navigationItem.title = _detail.category;
     
     self.titleLabel.text = _detail.title;
-    self.imageView.image = [UIImage imageNamed:_detail.imageName];
-    self.textView.text = _detail.text;
+    NSArray *images = [_detail imagesFromContent];
+    
+    NSString *imagesUrlString = [images objectAtIndex:0];
+    NSURL *imagesUrl = [NSURL URLWithString:imagesUrlString];
+    [self.imageView setImageWithURL:imagesUrl];
+    self.textView.text = _detail.itemDescription;
+    
     
     CGRect contentViewFrame = _contentView.frame;
     contentViewFrame.size.height += _textView.contentSize.height - _textView.frame.size.height;
@@ -57,4 +60,29 @@
     _scrollView.contentSize = _contentView.frame.size;
 }
 
+- (IBAction)openBarButtonAction:(id)sender {
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"отменить" destructiveButtonTitle:nil otherButtonTitles:@"Открыть",@"открыть в Safari", nil];
+    [actionSheet showInView:self.view];
+
+    
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+            [self performSegueWithIdentifier:@"OpenUrl" sender:self];
+            break;
+        case 1:
+            [[UIApplication sharedApplication] openURL:_detail.link];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    WebViewController *controller = segue.destinationViewController;
+    controller.url = _detail.link;
+}
 @end
