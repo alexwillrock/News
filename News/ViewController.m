@@ -13,6 +13,7 @@
 #import "UIImageView+AFNetworking.h"
 
 @interface ViewController ()
+- (IBAction)refreshAction:(id)sender;
 
 @end
 
@@ -22,24 +23,8 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"ITDox";
+    self.navigationItem.title = @"MyRss";
     
-
-    
-    NSURL *url = [NSURL URLWithString:@"http://itdox.ru/feed/"];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    
-    [RSSParser parseRSSFeedForRequest:request success:^(NSArray *feedItems){
-            for (RSSItem *item in feedItems) {
-                NSLog(@"%@", item.title);
-                
-                _data = feedItems;
-                [self.tableView reloadData];
-            }
-        }
-        failure:^(NSError *error){
-            NSLog(@"%@", error);
-        }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,7 +34,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_data count];
+    return [self.data count];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -69,7 +54,7 @@
     static NSString *const CellId3 = @"ImageCell";	
     
     ImageCell *cell = [tableView dequeueReusableCellWithIdentifier: CellId3];
-    RSSItem *item = [_data objectAtIndex:indexPath.row];
+    RSSItem *item = [self.data objectAtIndex:indexPath.row];
     
     cell.cellTextLabel.text = item.title;
     NSArray *images = [item imagesFromContent];
@@ -85,9 +70,26 @@
 
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     if(indexPath) {
-        RSSItem *item = [_data objectAtIndex:indexPath.row];
+        RSSItem *item = [self.data objectAtIndex:indexPath.row];
         [segue.destinationViewController setDetail:item];
     }
 }
 
+- (IBAction)refreshAction:(id)sender {
+    [[UIApplication sharedApplication]beginIgnoringInteractionEvents]; //игнорировать пользователя
+    NSURL *url = [NSURL URLWithString:@"http://itdox.ru/feed/"];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    
+    [RSSParser parseRSSFeedForRequest:request success:^(NSArray *feedItems){
+        [[UIApplication sharedApplication]endIgnoringInteractionEvents];
+        self.data = feedItems;
+        [self.tableView reloadData];
+    }
+                              failure:^(NSError *error){
+                                  [[UIApplication sharedApplication]endIgnoringInteractionEvents];
+                                  NSLog(@"%@", error);
+                                  UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Ошибка" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"окей" otherButtonTitles:nil];
+                                  [alertView show];
+                              }];
+}
 @end

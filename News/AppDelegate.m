@@ -7,12 +7,33 @@
 //
 
 #import "AppDelegate.h"
+#import "RSSParser.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+        //
+    NSURL *url = [NSURL URLWithString:@"http://itdox.ru/feed/"];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    
+    [RSSParser parseRSSFeedForRequest:request success:^(NSArray *feedItems){
+            UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+            UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"InintialController"];
+            
+            ViewController *viewController = [navigationController.viewControllers objectAtIndex:0];
+            
+            viewController.data = feedItems;
+            [viewController.tableView reloadData];
+            
+            self.window.rootViewController = navigationController;
+    }
+                              failure:^(NSError *error){
+                                  NSLog(@"%@", error);
+                                  UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Ошибка" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"окей" otherButtonTitles:nil];
+                                  [alertView show];
+                              }];
     return YES;
 }
 							

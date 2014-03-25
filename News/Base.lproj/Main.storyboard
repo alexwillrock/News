@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Dk7-wV-wwH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="itx-BG-aqb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -57,7 +57,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="6Au-5b-MgE"/>
+                    <navigationItem key="navigationItem" id="6Au-5b-MgE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="1A0-wS-ptm">
+                            <connections>
+                                <action selector="refreshAction:" destination="vXZ-lx-hvc" id="PJi-Xk-ivd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="JGe-kW-QQD" id="cj2-Rp-rI2"/>
                     </connections>
@@ -174,7 +180,7 @@
         <!--Navigation Controller-->
         <scene sceneID="vBs-BY-RWF">
             <objects>
-                <navigationController definesPresentationContext="YES" id="Dk7-wV-wwH" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="InintialController" definesPresentationContext="YES" id="Dk7-wV-wwH" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pqv-3x-vYS">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -185,6 +191,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rb9-3x-2lc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="167" y="-462"/>
+        </scene>
+        <!--Splash Screen View Controller-->
+        <scene sceneID="k0L-Vh-uT4">
+            <objects>
+                <viewController id="itx-BG-aqb" customClass="SplashScreenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="anR-8W-JJf"/>
+                        <viewControllerLayoutGuide type="bottom" id="w8v-BB-Zev"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6El-QY-oa2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="03X-zk-oQY">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="564"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bfg-R9-JxS">
+                                <rect key="frame" x="150" y="461" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="03X-zk-oQY" id="fPl-QY-pE4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dRe-MG-4OS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="167" y="255"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

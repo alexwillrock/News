@@ -23,6 +23,10 @@
 		8401819018DE8D5D0067A902 /* NewsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8401818F18DE8D5D0067A902 /* NewsTests.m */; };
 		8401819B18DE98DE0067A902 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8401819A18DE98DE0067A902 /* ImageCell.m */; };
 		8421453418DEAA93005ABE22 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421453318DEAA93005ABE22 /* DetailViewController.m */; };
+		84413BE618E1278100179B2F /* default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84413BE418E1278100179B2F /* default-568h@2x.png */; };
+		84413BE718E1278100179B2F /* default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84413BE518E1278100179B2F /* default@2x.png */; };
+		84413BE918E1296A00179B2F /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84413BE818E1296A00179B2F /* default.png */; };
+		84413BEC18E12A8700179B2F /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84413BEB18E12A8700179B2F /* SplashScreenViewController.m */; };
 		84553B0418DFFC3A00D5F7A7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84553AED18DFFC3A00D5F7A7 /* AFHTTPRequestOperation.m */; };
 		84553B0518DFFC3A00D5F7A7 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84553AEF18DFFC3A00D5F7A7 /* AFHTTPRequestOperationManager.m */; };
 		84553B0618DFFC3A00D5F7A7 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84553AF118DFFC3A00D5F7A7 /* AFHTTPSessionManager.m */; };
@@ -72,6 +76,11 @@
 		8401819A18DE98DE0067A902 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		8421453218DEAA93005ABE22 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		8421453318DEAA93005ABE22 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		84413BE418E1278100179B2F /* default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-568h@2x.png"; sourceTree = "<group>"; };
+		84413BE518E1278100179B2F /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default@2x.png"; sourceTree = "<group>"; };
+		84413BE818E1296A00179B2F /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
+		84413BEA18E12A8700179B2F /* SplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreenViewController.h; sourceTree = "<group>"; };
+		84413BEB18E12A8700179B2F /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreenViewController.m; sourceTree = "<group>"; };
 		84553AEC18DFFC3A00D5F7A7 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		84553AED18DFFC3A00D5F7A7 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		84553AEE18DFFC3A00D5F7A7 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -159,9 +168,12 @@
 		8401816A18DE8D5D0067A902 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				84413BE318E1278100179B2F /* Resources */,
 				8401817318DE8D5D0067A902 /* AppDelegate.h */,
 				8401817418DE8D5D0067A902 /* AppDelegate.m */,
 				8401817618DE8D5D0067A902 /* Main.storyboard */,
+				84413BEA18E12A8700179B2F /* SplashScreenViewController.h */,
+				84413BEB18E12A8700179B2F /* SplashScreenViewController.m */,
 				84553B1218E00CCD00D5F7A7 /* WebViewController.h */,
 				84553B1318E00CCD00D5F7A7 /* WebViewController.m */,
 				8421453218DEAA93005ABE22 /* DetailViewController.h */,
@@ -170,7 +182,6 @@
 				8401817A18DE8D5D0067A902 /* ViewController.m */,
 				8401819918DE98DE0067A902 /* ImageCell.h */,
 				8401819A18DE98DE0067A902 /* ImageCell.m */,
-				8401819F18DE9F650067A902 /* Resources */,
 				8401817C18DE8D5D0067A902 /* Images.xcassets */,
 				8401816B18DE8D5D0067A902 /* Supporting Files */,
 			);
@@ -206,9 +217,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8401819F18DE9F650067A902 /* Resources */ = {
+		84413BE318E1278100179B2F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				84413BE818E1296A00179B2F /* default.png */,
+				84413BE418E1278100179B2F /* default-568h@2x.png */,
+				84413BE518E1278100179B2F /* default@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -338,8 +352,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8401817D18DE8D5D0067A902 /* Images.xcassets in Resources */,
+				84413BE618E1278100179B2F /* default-568h@2x.png in Resources */,
+				84413BE718E1278100179B2F /* default@2x.png in Resources */,
 				8401816F18DE8D5D0067A902 /* InfoPlist.strings in Resources */,
 				8401817818DE8D5D0067A902 /* Main.storyboard in Resources */,
+				84413BE918E1296A00179B2F /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +379,7 @@
 				84553B1118E003BE00D5F7A7 /* UIImageView+AFNetworking.m in Sources */,
 				84553B0E18DFFC3A00D5F7A7 /* RSSParser.m in Sources */,
 				8401817B18DE8D5D0067A902 /* ViewController.m in Sources */,
+				84413BEC18E12A8700179B2F /* SplashScreenViewController.m in Sources */,
 				8401819B18DE98DE0067A902 /* ImageCell.m in Sources */,
 				84553B0718DFFC3A00D5F7A7 /* AFNetworkReachabilityManager.m in Sources */,
 				8401817518DE8D5D0067A902 /* AppDelegate.m in Sources */,
